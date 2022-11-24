@@ -16,7 +16,6 @@ const express_1 = require("express");
 const createFormResponse_1 = __importDefault(require("../modules/createFormResponse"));
 const resizeImage_1 = __importDefault(require("../modules/resizeImage"));
 const cachedResize_1 = __importDefault(require("../modules/cachedResize"));
-const customErrors_1 = __importDefault(require("../utilities/customErrors"));
 const resize = (0, express_1.Router)();
 const resizeImageFunction = (0, cachedResize_1.default)(resizeImage_1.default);
 resize.get('/resize', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,8 +28,8 @@ resize.get('/resize', (req, res, next) => __awaiter(void 0, void 0, void 0, func
         res.status(200).send(response);
     }
     catch (error) {
-        if (error instanceof customErrors_1.default) {
-            res.status(error.statusCode).send(error.message);
+        if (error instanceof Error) {
+            next(error.message);
         }
         else {
             next(error);

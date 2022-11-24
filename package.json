@@ -6,9 +6,10 @@
   "scripts": {
     "lint": "eslint **/*.ts --ignore-pattern node_modules/",
     "prettier": "prettier --config .prettierrc.json **/*.ts --write",
-    "useJasmine": "npx jasmine",
     "build": "npx tsc ",
-    "test": "npm run build && npm run useJasmine",
+    "pretest": "npx tsc ",
+    "test": "npx jasmine",
+    "prestart": "npx tsc",
     "start": "node ./build/."
   },
   "keywords": [

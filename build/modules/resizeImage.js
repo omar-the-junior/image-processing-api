@@ -14,20 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const promises_1 = require("node:fs/promises");
 const sharp_1 = __importDefault(require("sharp"));
-const customErrors_1 = __importDefault(require("../utilities/customErrors"));
 const resizeImage = (imageName, width, height) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const [plainName] = String(imageName).split('.');
-        const newImageName = `${plainName}${width}x${height}.jpg`;
-        const imageBuffer = yield (0, sharp_1.default)(`./public/images/${imageName}`)
-            .resize(Number(width), Number(height))
-            .jpeg()
-            .toBuffer();
-        yield (0, promises_1.writeFile)(`./public/thumb/${newImageName}`, imageBuffer);
-        return `\n <div style="display:flex; justify-content: center; margin-top: 30px;"><img src="/thumb/${newImageName}"></div>`;
+    const [plainName] = String(imageName).split('.');
+    const newImageName = `${plainName}${width}x${height}.jpg`;
+    const publicFolders = yield (0, promises_1.readdir)('./public');
+    if (!publicFolders.includes('thumb')) {
+        yield (0, promises_1.mkdir)('./public/thumb');
     }
-    catch (error) {
-        throw new customErrors_1.default(500, 'Something went wrong with Image resize');
-    }
+    const imageBuffer = yield (0, sharp_1.default)(`./public/images/${imageName}`)
+        .resize(Number(width), Number(height))
+        .jpeg()
+        .toBuffer();
+    yield (0, promises_1.writeFile)(`./public/thumb/${newImageName}`, imageBuffer);
+    return `\n <div style="display:flex; justify-content: center; margin-top: 30px;"><img src="/thumb/${newImageName}"></div>`;
 });
 exports.default = resizeImage;

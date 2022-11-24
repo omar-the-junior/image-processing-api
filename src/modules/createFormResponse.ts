@@ -1,23 +1,10 @@
 import { readdir } from 'fs/promises';
-import CustomError from '../utilities/customErrors';
 const createFormResponse = async (
   selectedImageName: string,
   width: number,
   height: number
 ) => {
   const imagesNames = await readdir('public/images');
-
-  if (selectedImageName && !imagesNames.includes(selectedImageName)) {
-    throw new CustomError(
-      400,
-      '<h1 style="text-align: center;"><span style="color: red;">Error:</span> Invalid Image name, Please insert a correct Image name</h1> \n <h2 style="text-align: center;"><a href="/resize" >Click Here</a> to go back</h2>'
-    );
-  } else if (selectedImageName && (width <= 0 || height <= 0)) {
-    throw new CustomError(
-      400,
-      '<h1 style="text-align: center;"><span style="color: red;">Error:</span> Invalid Image dimensions, Please insert valid dimensions (More than 0)</h1> \n <h2 style="text-align: center;"><a href="/resize">Click Here</a> to go back</h2>'
-    );
-  }
 
   let selectOptions = '';
 

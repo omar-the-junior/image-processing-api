@@ -29,23 +29,23 @@ describe('Endpoint Check', () => {
       const response = await request.get(`/wrongEndpoint`);
       expect(response.statusCode).toBe(404);
     });
-    it('Should throw an error 400 when unknown image name is inserted', async () => {
+    it('Should throw an error 500 when unknown image name is inserted', async () => {
       const response = await request.get('/resize?imageName="ksjdf"');
-      expect(response.statusCode).toBe(400);
+      expect(response.statusCode).toBe(500);
     });
-    it('Should throw an error 400 when dimensions === 0', async () => {
+    it('Should throw an error 500 when dimensions === 0', async () => {
       const images = await readdir('./public/images/');
       const response = await request.get(
         `/resize?imageName=${images[0]}&width=0&height=0`
       );
-      expect(response.statusCode).toBe(400);
+      expect(response.statusCode).toBe(500);
     });
-    it('Should throw an error 400 when dimensions < 0', async () => {
+    it('Should throw an error 500 when dimensions < 0', async () => {
       const images = await readdir('./public/images/');
       const response = await request.get(
         `/resize?imageName=${images[0]}&width=-3&height=4`
       );
-      expect(response.statusCode).toBe(400);
+      expect(response.statusCode).toBe(500);
     });
   });
 

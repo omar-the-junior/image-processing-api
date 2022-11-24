@@ -37,19 +37,19 @@ describe('Endpoint Check', () => {
             const response = yield request.get(`/wrongEndpoint`);
             expect(response.statusCode).toBe(404);
         }));
-        it('Should throw an error 400 when unknown image name is inserted', () => __awaiter(void 0, void 0, void 0, function* () {
+        it('Should throw an error 500 when unknown image name is inserted', () => __awaiter(void 0, void 0, void 0, function* () {
             const response = yield request.get('/resize?imageName="ksjdf"');
-            expect(response.statusCode).toBe(400);
+            expect(response.statusCode).toBe(500);
         }));
-        it('Should throw an error 400 when dimensions === 0', () => __awaiter(void 0, void 0, void 0, function* () {
+        it('Should throw an error 500 when dimensions === 0', () => __awaiter(void 0, void 0, void 0, function* () {
             const images = yield (0, promises_1.readdir)('./public/images/');
             const response = yield request.get(`/resize?imageName=${images[0]}&width=0&height=0`);
-            expect(response.statusCode).toBe(400);
+            expect(response.statusCode).toBe(500);
         }));
-        it('Should throw an error 400 when dimensions < 0', () => __awaiter(void 0, void 0, void 0, function* () {
+        it('Should throw an error 500 when dimensions < 0', () => __awaiter(void 0, void 0, void 0, function* () {
             const images = yield (0, promises_1.readdir)('./public/images/');
             const response = yield request.get(`/resize?imageName=${images[0]}&width=-3&height=4`);
-            expect(response.statusCode).toBe(400);
+            expect(response.statusCode).toBe(500);
         }));
     });
     afterAll(() => __awaiter(void 0, void 0, void 0, function* () {

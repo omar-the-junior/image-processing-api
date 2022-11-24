@@ -22,6 +22,6 @@ app.use((req, res) => {
 });
 app.listen(port, () => {
     // eslint-disable-next-line no-console
-    console.log(`Server is running on port: ${port}`);
+    console.log(`Server is running on port: ${port}\n With URL http://localhost:3000`);
 });
 exports.default = app;

@@ -4,7 +4,7 @@ const app = express();
 
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/', (req: express.Request, res: express.Response): void => {
   res.status(200).send(`
   <h1 style="text-align:center;">Welcome to the Image Processing API</h1>
   <p style="text-align:center;"><a href="/resize">Click Here</a> to head to the Image resize API</p>
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 app.use(express.static('public'));
 
 app.use(resize);
-app.use((req, res) => {
+app.use((req: express.Request, res: express.Response): void => {
   res
     .status(404)
     .send(
@@ -22,9 +22,11 @@ app.use((req, res) => {
     );
 });
 
-app.listen(port, () => {
+app.listen(port, (): void => {
   // eslint-disable-next-line no-console
-  console.log(`Server is running on port: ${port}`);
+  console.log(
+    `Server is running on port: ${port}\n With URL http://localhost:3000`
+  );
 });
 
 export default app;

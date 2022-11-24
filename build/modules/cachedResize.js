@@ -14,10 +14,17 @@ const cachedResize = (f) => {
     return (imageName, width, height) => __awaiter(void 0, void 0, void 0, function* () {
         const [plainName] = imageName.split('.');
         const resizedImageName = `${plainName}${width}x${height}.jpg`;
+        let status = '\n <h2 style="text-align:center;">Your Image was already resized. Here is the saved thumbnail 😄</h2>';
         if (!Object.keys(cache).includes(resizedImageName)) {
+            status = '';
             cache[resizedImageName] = yield f(imageName, width, height);
         }
-        return cache[resizedImageName];
+        // console.log(status);
+        // console.log(
+        //   '-------------------------------------- cache ------------------------------------'
+        // );
+        // console.table(cache);
+        return status + cache[resizedImageName];
     });
 };
 exports.default = cachedResize;
