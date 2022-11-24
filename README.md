@@ -1,7 +1,11 @@
 # image-processing-api
 A Project for the EGFWD [Full stack web developer advanced track](https://egfwd.com/specializtion/web-development-advanced/) provided by [Udacity](https://www.udacity.com/). For image processing I used [Sharp](https://www.npmjs.com/package/sharp) as a module. 
 
-# Scripts
+# instructions
+## Scripts
+
+### Install node_modules
+   `npm install`
 
 ### Running tests
    `npm test` or `npm run test`
@@ -15,7 +19,7 @@ A Project for the EGFWD [Full stack web developer advanced track](https://egfwd.
 ### Formatting with prettier
    `npm run prettier`
 
-# Endpoints
+## Endpoints
    ### Origin endpoint which leads to home page 
    [http://localhost:3000/](http://localhost:3000/)
    
